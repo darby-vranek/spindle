@@ -1,0 +1,52 @@
+{% extends '_page.html' %}
+{% block title %}verses{% endblock %}
+{% block main %}
+  <div class="header">
+    <h1 class="display-2 text-white mb-0">Verses</h1>
+    <a href="{% url 'verse-create' %}">
+      <button type="button" class="btn btn-white">New</button>
+    </a>
+  </div>
+  <div class="col-8">
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-flush" id="datatable-basic">
+          <thead class="thead-light">
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Franchise</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Posts</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Threads</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for verse in verse_list %}
+            <tr>
+                <td class="text-sm font-weight-normal"><a href="{% url 'verse-detail' pk=verse.pk %}">{{ verse.name }}</a></td>
+              <td class="text-sm font-weight-normal">{{ verse.franchise }}</td>
+              <td class="text-sm font-weight-normal">NUM</td>
+              <td class="text-sm font-weight-normal">NUM</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_scripts %}
+{% load static %}
+<script src="{% static 'assets/js/plugins/datatables.js' %}"></script>
+<script>
+  const dataTableBasic = new simpleDatatables.DataTable("#datatable-basic", {
+    searchable: true,
+    fixedHeight: true
+  });
+
+  const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+    searchable: true,
+    fixedHeight: true
+  });
+</script>
+{% endblock %}

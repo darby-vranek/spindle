@@ -1,0 +1,54 @@
+{% extends '_page.html' %}
+{% block title %}posts{% endblock %}
+{% block main %}
+  <div class="header">
+    <h1 class="display-2 text-white mb-0">Posts</h1>
+    <a href="{% url 'post-create' %}">
+      <button type="button" class="btn btn-white">New</button>
+    </a>
+  </div>
+  <div class="col-8">
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-flush" id="datatable-basic">
+          <thead class="thead-light">
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Character</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Verse</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Words</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Posted</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for post in post_list %}
+            <tr>
+              <td class="text-sm font-weight-normal">gail-force-twelve</td>
+              <td class="text-sm font-weight-normal"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></td>
+              <td class="text-sm font-weight-normal">far, far away</td>
+              <td class="text-sm font-weight-normal">{{ post.content.html|striptags|wordcount }}</td>
+              <td class="text-sm font-weight-normal">{{ post.created }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_scripts %}
+{% load static %}
+<script src="{% static 'assets/js/plugins/datatables.js' %}"></script>
+<script>
+  const dataTableBasic = new simpleDatatables.DataTable("#datatable-basic", {
+    searchable: true,
+    fixedHeight: true
+  });
+
+  const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+    searchable: true,
+    fixedHeight: true
+  });
+</script>
+{% endblock %}

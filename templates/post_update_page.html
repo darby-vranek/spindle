@@ -1,0 +1,26 @@
+{% extends '_page.html' %}
+{% load static %}
+{% block title %}new post{% endblock %}
+{% block main %}
+{% include 'django_quill/media.html' %}
+
+<div class="col-8">
+  <div class="card">
+    <div class="card-body">
+      <form class="" action="{% url 'post-create' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" />
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'assets/js/plugins/quill.min.js' %}"></script>
+<script>
+
+</script>
+{% endblock %}

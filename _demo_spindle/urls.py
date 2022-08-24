@@ -20,8 +20,18 @@ from spindle import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', views.home_page, name='home'),
+    path('', views.home_page, name='home'),
     path('characters/', views.character_list_page, name='character-list'),
     path('characters/new/', views.character_create_page, name='character-create'),
     path('characters/<slug:pk>/', views.character_detail_page, name='character-detail'),
+    path('posts/', views.PostListView.as_view(), name='post-list'),
+    path('posts/new/', views.PostCreateView.as_view(), name='post-create'),
+    path('posts/<int:pk>/', views.PostDetailView.as_view(), name='post-detail'),
+    path('posts/<int:pk>/edit/', views.PostUpdateView.as_view(), name='post-update'),
+    path('posts/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post-delete'),
+    path('verses/', views.VerseListView.as_view(), name='verse-list'),
+    path('verses/new/', views.VerseCreateView.as_view(), name='verse-create'),
+    path('verses/<int:pk>/', views.VerseDetailView.as_view(), name='verse-detail'),
+    path('verses/<int:pk>/edit/', views.VerseUpdateView.as_view(), name='verse-update'),
+    path('verses/<int:pk>/delete/', views.VerseDeleteView.as_view(), name='verse-delete'),
 ]

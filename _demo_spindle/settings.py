@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'spindle',
+    'django_quill',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,25 @@ STATIC_ROOT = 'staticfiles/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+QUILL_CONFIGS = {
+    'default':{
+        'theme': 'snow',
+        'modules': {
+            'syntax': True,
+            'toolbar': [
+                [{'align': []}],
+                [
+                    { 'size': ['small', False, 'large', 'huge'] },
+                    'bold', 'italic', 'underline', 'strike', 'blockquote',
+                    {'color': []},
+                ],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+
+                ['code-block', 'link', 'blockquote'],
+                ['clean'],
+            ]
+        }
+    }
+}

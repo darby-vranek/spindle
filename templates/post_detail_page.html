@@ -1,0 +1,70 @@
+{% extends '_page.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block headlinks %}{% include 'django_quill/media.html' %}{% endblock %}
+{% block main %}
+
+<div class="row">
+  <div class="col-8 ">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-10">
+            <h6 class="card-subtitle text-danger"><i class="ni ni-planet small"></i> far, far away</h6>
+            <h1 class="card-title">{{ post.title }}</h1>
+          </div>
+          <div class="col-2 text-end">
+            <div class="btn-group">
+              <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-icon btn-round btn-primary btn-xs" type="button">
+                <span class="btn-inner--icon"><i class="fa fa-pen"></i></span>
+              </a>
+              <a href="{% url 'post-delete' pk=post.pk %}" class="btn btn-icon btn-round btn-danger btn-xs" type="button">
+                <span class="btn-inner--icon"><i class="fa fa-trash small"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+          <div class="author align-items-center">
+            <img src="https://i.pinimg.com/originals/91/8d/f9/918df9248642489e7a5698600dcf2a52.jpg" alt="..." class="avatar shadow">
+            <div class="name ps-3">
+              <span>gail-force-twelve</span>
+              <div class="stats">
+                <small>{{ post.created }}</small>
+              </div>
+            </div>
+          </div>
+      </div>
+      <hr>
+      <div class="card-body ql-editor">
+        {{ post.content.html|safe }}
+      </div>
+      <hr>
+      <div class="card-footer">
+        {% if post.comments %}
+        <div class="stats">
+          <p class="text-xs"><em>{{ post.comments }}</em></p>
+        </div>
+        {% endif %}
+        {% for tag in post.tag_list %}
+          <span class="badge badge-sm badge-danger">#{{ tag|slugify }}</span>
+        {% endfor %}
+        <!-- <span class="badge bg-gradient-secondary">#{% lorem 1 w random %}</span>
+        <span class="badge bg-gradient-secondary">#{% lorem 2 w random %}</span>
+        <span class="badge bg-gradient-secondary">#{% lorem 1 w random %}</span>
+        <span class="badge bg-gradient-secondary">#{% lorem 1 w random %}</span>
+        <span class="badge bg-gradient-secondary">#{% lorem 3 w random %}</span>
+        <span class="badge bg-gradient-secondary">#{% lorem 1 w random %}</span>
+        <span class="badge bg-gradient-secondary">#{% lorem 1 w random %}</span> -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+{% load static %}
+<script>
+ var quill = document.getElementByClass('ql-editor')[0];
+</script>
+{% endblock %}
