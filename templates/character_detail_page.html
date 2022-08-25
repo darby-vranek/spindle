@@ -1,5 +1,35 @@
 {% extends '_page.html' %}
 {% block title %}{{ character.page_name }}{% endblock %}
 {% block main %}
-
+<div class="col-md-4">
+    <div class="card rounded-0">
+      <div class="row">
+        <div class="col-lg-5">
+          <a href="javascript:;">
+            <div class="position-relative">
+              <div class="blur-shadow-image">
+                <img class="w-100 shadow-lg" src="{{ character.big_portrait }}">
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-7 ps-0 my-auto">
+          <div class="card-body text-left">
+            <div class="p-md-0 pt-3">
+              <h5 class="font-weight-bolder mb-0">{{ character.name }}</h5>
+              <p class="text-uppercase text-sm font-weight-bold mb-2">{{ character.caption }}</p>
+            </div>
+              <div class="btn-group">
+              <a href="{% url 'character-update' page_name=character.page_name %}" class="btn btn-icon btn-round btn-primary btn-xs" type="button">
+                <span class="btn-inner--icon"><i class="fa fa-pen"></i></span>
+              </a>
+              <a href="{% url 'character-delete' page_name=character.page_name %}" class="btn btn-icon btn-round btn-danger btn-xs" type="button">
+                <span class="btn-inner--icon"><i class="fa fa-trash small"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
 {% endblock %}

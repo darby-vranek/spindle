@@ -1,5 +1,33 @@
 {% extends '_page.html' %}
 {% block title %}characters{% endblock %}
 {% block main %}
+<div class="row">
+    {% for character in character_list %}
+    <div class="col-6 col-md-4">
+    <div class="card rounded-0">
+      <div class="row">
+        <div class="col-lg-4">
+          <a href="javascript:;">
+            <div class="position-relative">
+              <div class="blur-shadow-image">
+                <img class="w-100 shadow-lg" src="{{ character.avatar }}">
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-8 ps-0 my-auto">
+          <div class="card-body text-left">
+            <div class="p-md-0 pt-3">
+                <h5 class="font-weight-bolder mb-0"><a href="{% url 'character-detail' page_name=character.page_name %}">{{ character.name }}</a></h5>
+              <p class="text-uppercase text-sm font-weight-bold mb-2">{{ character.caption }}</p>
+            </div>
 
+          </div>
+        </div>
+      </div>
+    </div>
+        </div>
+    {% endfor %}
+
+</div>
 {% endblock %}

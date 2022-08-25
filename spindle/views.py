@@ -27,8 +27,11 @@ class CharacterCreateView(CreateView):
         return super().form_valid(form)
 
 
-def character_update_page(request):
-    return render(request, 'character_form_page.html')
+class CharacterDeleteView(DeleteView):
+    model = models.Character
+    success_url = reverse_lazy('character-list')
+    slug_field = 'page_name'
+    slug_url_kwarg = 'page_name'
 
 
 class CharacterDetailView(DetailView):
@@ -38,10 +41,17 @@ class CharacterDetailView(DetailView):
     slug_url_kwarg = 'page_name'
 
 
-
 class CharacterListView(ListView):
     model = models.Character
     template_name = 'character_list_page.html'
+
+
+class CharacterUpdateView(UpdateView):
+    model = models.Character
+    form_class = models.CharacterForm
+    template_name = 'form_page.html'
+    slug_field = 'page_name'
+    slug_url_kwarg = 'page_name'
 
 
 class PostCreateView(CreateView):
