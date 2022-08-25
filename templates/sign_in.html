@@ -1,0 +1,22 @@
+{% extends '_page.html' %}
+{% block title %}sign in{% endblock %}
+{% block main %}
+    <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-7">
+            <div class="card border-0 mb-0">
+              <div class="card-header bg-transparent">
+                <h5 class="text-dark text-center mt-2 mb-3">Sign in</h5>
+              </div>
+              <div class="card-body px-lg-5 pt-0">
+                <form role="form" class="text-start" method="post">
+                    {% csrf_token %}
+                  {{ form.as_p }}
+                    <input type="submit" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

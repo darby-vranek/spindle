@@ -128,6 +128,10 @@ STATIC_ROOT = 'staticfiles/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+LOGIN_URL = '/signin'
+LOGIN_REDIRECT_URL = '/'
+
+
 QUILL_CONFIGS = {
     'default':{
         'theme': 'snow',

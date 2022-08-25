@@ -2,13 +2,13 @@
   class="shadow-none navbar navbar-main navbar-transparent z-index-3 py-3">
   <div class="container">
     <a class="navbar-brand text-white" href="{% url 'home' %}" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom">
-      SPINDLE
+      {{ user.username }}
     </a>
     <div class="" id="navigation">
       <ul class="navbar-nav navbar-nav-hover ms-auto">
         <div class="row">
           <div class="col-auto m-auto">
-            <a class="text-white cursor-pointer">
+            <a class="text-white cursor-pointer" href="{% url 'character-list' %}">
               <i class="ni ni-single-02 fixed-plugin-button-nav"></i> Characters
             </a>
           </div>

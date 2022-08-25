@@ -25,7 +25,7 @@
             <tr>
               <td class="text-sm font-weight-normal">gail-force-twelve</td>
               <td class="text-sm font-weight-normal"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></td>
-              <td class="text-sm font-weight-normal">far, far away</td>
+              <td class="text-sm font-weight-normal">{{ post.verse.name }}</td>
               <td class="text-sm font-weight-normal">{{ post.content.html|striptags|wordcount }}</td>
               <td class="text-sm font-weight-normal">{{ post.created }}</td>
             </tr>

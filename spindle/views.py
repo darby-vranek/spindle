@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib.auth import logout
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -11,27 +12,46 @@ def home_page(request):
     return render(request, 'home_page.html')
 
 
-def character_detail_page(request):
-    return render(request, 'character_detail_page.html')
+def sign_out(request):
+    logout(request)
+    return redirect('sign-in')
 
 
-def character_create_page(request):
-    return render(request, 'character_form_page.html')
+class CharacterCreateView(CreateView):
+    model = models.Character
+    form_class = models.CharacterForm
+    template_name = 'form_page.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 def character_update_page(request):
     return render(request, 'character_form_page.html')
 
 
-def character_list_page(request):
-    return render(request, 'character_list_page.html')
+class CharacterDetailView(DetailView):
+    model = models.Character
+    template_name = 'character_detail_page.html'
+    slug_field = 'page_name'
+    slug_url_kwarg = 'page_name'
+
+
+
+class CharacterListView(ListView):
+    model = models.Character
+    template_name = 'character_list_page.html'
 
 
 class PostCreateView(CreateView):
     model = models.Post
     form_class = models.PostForm
     template_name = 'post_form_page.html'
-    success_url = reverse_lazy('post-list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class PostDeleteView(DeleteView):
@@ -48,7 +68,6 @@ class PostUpdateView(UpdateView):
     model = models.Post
     form_class = models.PostForm
     template_name = 'post_form_page.html'
-    success_url = reverse_lazy('post-list')
 
 
 class PostListView(ListView):
@@ -63,7 +82,10 @@ class VerseCreateView(CreateView):
     model = models.Verse
     form_class = models.VerseForm
     template_name = 'form_page.html'
-    success_url = reverse_lazy('verse-list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class VerseDeleteView(DeleteView):
@@ -85,4 +107,3 @@ class VerseUpdateView(UpdateView):
     model = models.Verse
     form_class = models.VerseForm
     template_name = 'form_page.html'
-    success_url = reverse_lazy('verse-list')

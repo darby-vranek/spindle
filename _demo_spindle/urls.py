@@ -14,16 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path
 from spindle import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('signin/', auth_views.LoginView.as_view(template_name='sign_in.html'), name='sign-in'),
+    path('signout/', views.sign_out, name='sign-out'),
     path('', views.home_page, name='home'),
-    path('characters/', views.character_list_page, name='character-list'),
-    path('characters/new/', views.character_create_page, name='character-create'),
-    path('characters/<slug:pk>/', views.character_detail_page, name='character-detail'),
+    path('characters/', views.CharacterListView.as_view(), name='character-list'),
+    path('characters/new/', views.CharacterCreateView.as_view(), name='character-create'),
+    path('characters/<slug:page_name>/', views.CharacterDetailView.as_view(), name='character-detail'),
     path('posts/', views.PostListView.as_view(), name='post-list'),
     path('posts/new/', views.PostCreateView.as_view(), name='post-create'),
     path('posts/<int:pk>/', views.PostDetailView.as_view(), name='post-detail'),
@@ -33,5 +36,5 @@ urlpatterns = [
     path('verses/new/', views.VerseCreateView.as_view(), name='verse-create'),
     path('verses/<int:pk>/', views.VerseDetailView.as_view(), name='verse-detail'),
     path('verses/<int:pk>/edit/', views.VerseUpdateView.as_view(), name='verse-update'),
-    path('verses/<int:pk>/delete/', views.VerseDeleteView.as_view(), name='verse-delete'),
+    path('verses/<int:pk>/delete/', views.VerseDeleteView.as_view(), name='verse-delete')
 ]
