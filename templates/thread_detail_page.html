@@ -1,0 +1,16 @@
+{% extends '_page.html' %}
+{% block title %}{{ thread.title }}{% endblock %}
+{% block headlinks %}{% include 'django_quill/media.html' %}{% endblock %}
+{% block main %}
+<div class="row">
+    <div class="col-md-4">
+        {% include 'thread_detail_header_card.html' %}
+    </div>
+    <div class="col-md-6">
+        {% for reply in thread.replies.all %}
+        {% include 'reply_detail_card.html' %}
+        {% endfor %}
+        {% include 'reply_create_card.html' %}
+    </div>
+</div>
+{% endblock %}

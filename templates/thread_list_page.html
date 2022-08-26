@@ -1,0 +1,54 @@
+{% extends '_page.html' %}
+{% block title %}threads{% endblock %}
+{% block main %}
+  <div class="header">
+    <h1 class="display-2 text-white mb-0">Threads</h1>
+    <a href="{% url 'thread-create' %}">
+      <button type="button" class="btn btn-white">New</button>
+    </a>
+  </div>
+  <div class="col-8">
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-flush" id="datatable-basic">
+          <thead class="thead-light">
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Characters</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Verse</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Replies</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Last Reply</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for thread in thread_list %}
+            <tr>
+              <td class="text-sm font-weight-normal"><a href="{% url 'thread-detail' pk=thread.pk %}">{{ thread.title }}</a></td>
+             <td class="text-sm font-weight-normal">
+                  <div class="avatar-group ms-auto">
+                    {% for character in thread.characters.all %}
+                    <a href="{% url 'character-detail' page_name=character.page_name %}" class="avatar avatar-lg avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ character.page_name }}">
+                      <img alt="{{ character.page_name }}" src="{{ character.avatar }}">
+                    </a>
+                    {% endfor %}
+                  </div>
+              </td>
+              <td class="text-sm font-weight-normal">
+                  {% if thread.verse %}
+                      <a href="{% url 'verse-detail' pk=thread.verse.pk %}">{{ thread.verse.name }}</a>
+                  {% endif %}
+              </td>
+              <td class="text-sm font-weight-normal">{{ thread.replies.all|length }}</td>
+                <td class="text-sm font-weight-normal">
+                    {% if thread.replies.all %}
+                    {{ thread.last_reply.created|date:'SHORT_DATE_FORMAT' }} by <a href="{% url 'character-detail' page_name=thread.last_reply.character.page_name %}">{{ thread.last_reply.character.page_name }}</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

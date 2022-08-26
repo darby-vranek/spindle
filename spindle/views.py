@@ -2,19 +2,29 @@ from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic.list import ListView
+from django.views import View
 
 from . import models
 
 
 def home_page(request):
-    return render(request, 'home_page.html')
+    return render(request, 'home_page.html', context={
+        'character_list': models.Character.objects.all(),
+        'post_list': models.Post.objects.all(),
+        'verse_list': models.Verse.objects.all(),
+        'thread_list': models.Thread.objects.all(),
+        'reply_list': models.Reply.objects.all()
+    })
 
 
 def sign_out(request):
     logout(request)
     return redirect('sign-in')
+
+
+# ===== characters =====
 
 
 class CharacterCreateView(CreateView):
@@ -54,6 +64,9 @@ class CharacterUpdateView(UpdateView):
     slug_url_kwarg = 'page_name'
 
 
+# ===== posts =====
+
+
 class PostCreateView(CreateView):
     model = models.Post
     form_class = models.PostForm
@@ -83,6 +96,58 @@ class PostUpdateView(UpdateView):
 class PostListView(ListView):
     model = models.Post
     template_name = 'post_list_page.html'
+
+
+# ===== threads =====
+
+
+class ThreadCreateView(CreateView):
+    model = models.Thread
+    form_class = models.ThreadForm
+    template_name = 'post_form_page.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class ThreadDeleteView(DeleteView):
+    pass
+
+
+class ThreadDetailView(DetailView):
+    model = models.Thread
+    template_name = 'thread_detail_page.html'
+
+
+class ThreadListView(ListView):
+    model = models.Thread
+    template_name = 'thread_list_page.html'
+
+
+class ThreadUpdateView(UpdateView):
+    pass
+
+
+class ReplyCreateView(View):
+
+    def post(self, request, *args, **kwargs):
+        form = models.ReplyForm(request.POST)
+        if form.is_valid():
+            form.instance.user = self.request.user
+            form.save()
+        return redirect(reverse_lazy('thread-detail', kwargs={'pk': form.instance.thread.pk}))
+
+
+class ReplyDeleteView(DeleteView):
+    model = models.Reply
+    success_url = reverse_lazy('thread-list')
+
+
+class ReplyUpdateView(UpdateView):
+    model = models.Reply
+    form_class = models.ReplyForm
+    template_name = 'post_form_page.html'
 
 
 # ===== verses =====

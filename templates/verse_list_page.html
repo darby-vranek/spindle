@@ -25,7 +25,7 @@
                 <td class="text-sm font-weight-normal"><a href="{% url 'verse-detail' pk=verse.pk %}">{{ verse.name }}</a></td>
               <td class="text-sm font-weight-normal">{{ verse.franchise }}</td>
               <td class="text-sm font-weight-normal">{{ verse.posts.all|length }}</td>
-              <td class="text-sm font-weight-normal">NUM</td>
+              <td class="text-sm font-weight-normal">{{ verse.threads.all|length }}</td>
             </tr>
             {% endfor %}
           </tbody>

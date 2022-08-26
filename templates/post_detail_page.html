@@ -4,66 +4,67 @@
 {% block main %}
 
 <div class="row">
-  <div class="col-8 ">
-    <div class="card">
-      <div class="card-header">
-        <div class="row">
-          <div class="col-md-10">
-              {% if post.verse %}
-                  <h6 class="card-subtitle"><a class="text-danger" href="{% url 'verse-detail' pk=post.verse.pk %}"><i class="ni ni-planet small"></i> {{ post.verse.name }}</a></h6>
-              {% endif %}
-            <h1 class="card-title">{{ post.title }}</h1>
-          </div>
-          {% if post.user == user %}
-          <div class="col-2 text-end">
-            <div class="btn-group">
-              <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-icon btn-round btn-primary btn-xs" type="button">
-                <span class="btn-inner--icon"><i class="fa fa-pen"></i></span>
-              </a>
-              <a href="{% url 'post-delete' pk=post.pk %}" class="btn btn-icon btn-round btn-danger btn-xs" type="button">
-                <span class="btn-inner--icon"><i class="fa fa-trash small"></i></span>
-              </a>
+    <div class="col-md-10 col-lg-8 col-xl-6">
+        <div class="card">
+            <div class="card-header">
+{#                <div class="row">#}
+{#                    <div class="col-md-10">#}
+                {% if post.verse %}
+                <h6 class="card-subtitle"><a class="text-danger" href="{% url 'verse-detail' pk=post.verse.pk %}"><i class="ni ni-planet small"></i> {{ post.verse.name }}</a></h6>
+                {% endif %}
+                <h1 class="card-title">{{ post.title }}</h1>
+{#                    </div>#}
+{#                    {% if post.user == user %}#}
+{#                    <div class="col-2 text-end">#}
+{#                        <div class="btn-group">#}
+{#                            <a href="{% url 'post-update' pk=post.pk %}" class="btn btn-icon btn-round btn-primary btn-xs" type="button">#}
+{#                                <span class="btn-inner--icon"><i class="fa fa-pen"></i></span>#}
+{#                            </a>#}
+{#                            <a href="{% url 'post-delete' pk=post.pk %}" class="btn btn-icon btn-round btn-danger btn-xs" type="button">#}
+{#                                <span class="btn-inner--icon"><i class="fa fa-trash small"></i></span>#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    {% endif %}#}
+{#                </div>#}
+                <div class="author align-items-center">
+                    {% if post.character %}
+                    <img src="{{ post.character.avatar }}" alt="..." class="avatar shadow">
+                    <div class="name ps-3">
+                        <a href="{% url 'character-detail' page_name=post.character.page_name %}"><span>{{ post.character.page_name }}</span></a>
+                        <div class="stats">
+                            <small>{{ post.created }}</small>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="stats">
+                        <small>{{ post.created }}</small>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
-          </div>
-          {% endif %}
-        </div>
-
-
-          <div class="author align-items-center">
-            <img src="https://i.pinimg.com/originals/91/8d/f9/918df9248642489e7a5698600dcf2a52.jpg" alt="..." class="avatar shadow">
-            <div class="name ps-3">
-              <span>gail-force-twelve</span>
-              <div class="stats">
-                <small>{{ post.created }}</small>
-              </div>
+            <hr class="m-0">
+            <div class="card-body pb-2">
+                {{ post.content.html|safe }}
             </div>
-          </div>
-      </div>
-      <hr>
-      <div class="card-body ql-editor">
-        {{ post.content.html|safe }}
-      </div>
-      <hr>
-      <div class="card-footer">
-        {% if post.comments %}
-        <div class="stats">
-          <p class="text-xs"><em>{{ post.comments }}</em></p>
+            <hr class="m-0">
+            <div class="card-footer">
+                {% if post.comments %}
+                <div class="stats">
+                    <p class="text-xs"><em>{{ post.comments }}</em></p>
+                </div>
+                {% endif %}
+                {% if post.tags %}
+                {% for tag in post.tag_list %}
+                <span class="badge badge-sm badge-danger">#{{ tag|slugify }}</span>
+                {% endfor %}
+                {% endif %}
+            </div>
         </div>
-        {% endif %}
-        {% if post.tags %}
-            {% for tag in post.tag_list %}
-              <span class="badge badge-sm badge-danger">#{{ tag|slugify }}</span>
-            {% endfor %}
-        {% endif %}
-      </div>
     </div>
-  </div>
 </div>
 {% endblock %}
 
 {% block extra_scripts %}
-{% load static %}
-<script>
- var quill = document.getElementByClass('ql-editor')[0];
-</script>
+
 {% endblock %}

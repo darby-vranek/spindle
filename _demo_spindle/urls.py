@@ -24,19 +24,34 @@ urlpatterns = [
     path('signin/', auth_views.LoginView.as_view(template_name='sign_in.html'), name='sign-in'),
     path('signout/', views.sign_out, name='sign-out'),
     path('', views.home_page, name='home'),
+    # characters
     path('characters/', views.CharacterListView.as_view(), name='character-list'),
     path('characters/new/', views.CharacterCreateView.as_view(), name='character-create'),
     path('characters/<slug:page_name>/', views.CharacterDetailView.as_view(), name='character-detail'),
     path('characters/<slug:page_name>/edit/', views.CharacterUpdateView.as_view(), name='character-update'),
     path('characters/<slug:page_name>/delete/', views.CharacterDeleteView.as_view(), name='character-delete'),
+    # posts
     path('posts/', views.PostListView.as_view(), name='post-list'),
     path('posts/new/', views.PostCreateView.as_view(), name='post-create'),
     path('posts/<int:pk>/', views.PostDetailView.as_view(), name='post-detail'),
     path('posts/<int:pk>/edit/', views.PostUpdateView.as_view(), name='post-update'),
     path('posts/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post-delete'),
+    # verses
     path('verses/', views.VerseListView.as_view(), name='verse-list'),
     path('verses/new/', views.VerseCreateView.as_view(), name='verse-create'),
     path('verses/<int:pk>/', views.VerseDetailView.as_view(), name='verse-detail'),
     path('verses/<int:pk>/edit/', views.VerseUpdateView.as_view(), name='verse-update'),
-    path('verses/<int:pk>/delete/', views.VerseDeleteView.as_view(), name='verse-delete')
+    path('verses/<int:pk>/delete/', views.VerseDeleteView.as_view(), name='verse-delete'),
+    # threads
+    path('threads/', views.ThreadListView.as_view(), name='thread-list'),
+    path('threads/new/', views.ThreadCreateView.as_view(), name='thread-create'),
+    path('threads/<int:pk>/', views.ThreadDetailView.as_view(), name='thread-detail'),
+    path('threads/<int:pk>/edit/', views.ThreadUpdateView.as_view(), name='thread-update'),
+    path('threads/<int:pk>/delete/', views.ThreadDeleteView.as_view(), name='thread-delete'),
+    path('threads/<int:pk>/reply/', views.ReplyCreateView.as_view(), name='reply-create'),
+    path('replies/<int:pk>/edit/', views.ReplyUpdateView.as_view(), name='reply-update'),
+    path('replies/<int:pk>/delete/', views.ReplyDeleteView.as_view(), name='reply-delete'),
+
+
+
 ]

@@ -1,0 +1,28 @@
+<div class="card rounded-0">
+    <div class="card-body">
+    {% with form=thread.reply_form %}
+        <form action="{% url 'reply-create' pk=thread.pk %}" method="post">
+        {% csrf_token %}
+        {{ form.thread }}
+        <div class="form-group">
+            {{ form.character.label }}
+            <select class="form-control" name="{{ form.character.name }}" id="{{ form.character.id_for_label }}">
+
+                {% for character in thread.characters.all %}
+                    {% if character.user == user %}
+                    <option value="{{ character.pk }}">{{ character.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            {{ form.content }}
+        </div>
+        <div class="form-group">
+            {{ form.comments }}
+        </div>
+        <input type="submit">
+        </form>
+    {% endwith %}
+    </div>
+</div>

@@ -2,7 +2,8 @@
 {% block title %}posts{% endblock %}
 {% block main %}
   <div class="header">
-    <h1 class="display-2 text-white mb-0">Posts</h1>
+    <h3 class="mt-5 text-white">Build Your Profile</h3>
+          <h5 class="text-white font-weight-normal">This information will let us know more about you.</h5>
     <a href="{% url 'post-create' %}">
       <button type="button" class="btn btn-white">New</button>
     </a>
@@ -13,8 +14,8 @@
         <table class="table table-flush" id="datatable-basic">
           <thead class="thead-light">
             <tr>
-              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Character</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Character</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Verse</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Words</th>
               <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Posted</th>
@@ -23,9 +24,17 @@
           <tbody>
             {% for post in post_list %}
             <tr>
-              <td class="text-sm font-weight-normal">gail-force-twelve</td>
               <td class="text-sm font-weight-normal"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></td>
-              <td class="text-sm font-weight-normal">{{ post.verse.name }}</td>
+             <td class="text-sm font-weight-normal">
+                  {% if post.character %}
+                      <a href="{% url 'character-detail' page_name=post.character.page_name %}">{{ post.character.page_name }}</a>
+                  {% endif %}
+              </td>
+              <td class="text-sm font-weight-normal">
+                  {% if post.verse %}
+                      <a href="{% url 'verse-detail' pk=post.verse.pk %}">{{ post.verse.name }}</a>
+                  {% endif %}
+              </td>
               <td class="text-sm font-weight-normal">{{ post.content.html|striptags|wordcount }}</td>
               <td class="text-sm font-weight-normal">{{ post.created }}</td>
             </tr>

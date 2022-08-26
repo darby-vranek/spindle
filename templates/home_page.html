@@ -12,7 +12,7 @@
                 <div class="numbers">
                   <p class="text-sm mb-0 text-uppercase font-weight-bold">Characters</p>
                   <h5 class="font-weight-bolder">
-                    50
+                    {{ character_list|length }}
                   </h5>
                 </div>
               </div>
@@ -33,7 +33,7 @@
                 <div class="numbers">
                   <p class="text-sm mb-0 text-uppercase font-weight-bold">Posts</p>
                   <h5 class="font-weight-bolder">
-                    19
+                    {{ post_list|length }}
                   </h5>
                 </div>
               </div>
@@ -54,7 +54,7 @@
                 <div class="numbers">
                   <p class="text-sm mb-0 text-uppercase font-weight-bold">Threads/<span class="text-secondary text-sm">Replies</span></p>
                   <h5 class="font-weight-bolder">
-                    19/<span class="text-secondary text-sm">948</span>
+                    {{ thread_list|length }}/<span class="text-secondary text-sm">{{ reply_list|length }}</span>
                   </h5>
                 </div>
               </div>
@@ -75,7 +75,7 @@
                 <div class="numbers">
                   <p class="text-sm mb-0 text-uppercase font-weight-bold">Verses</p>
                   <h5 class="font-weight-bolder">
-                    11
+                    {{ verse_list|length }}
                   </h5>
                 </div>
               </div>

@@ -1,0 +1,16 @@
+<div class="col">
+<div class="card mb-5 rounded-0 mx-2 px-0" style="max-height:100px;">
+  <div class="row g-0">
+    <div class="col-auto">
+      <img src="{{ character.avatar }}" class="img-fluid height-100" alt="...">
+    </div>
+    <div class="col">
+      <div class="card-body">
+          <h5 class="card-title mb-0"><a href="{% url 'character-detail' page_name=character.page_name %}">{{ character.page_name }}</a></h5>
+        <p class="card-text">{{ character.caption }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+

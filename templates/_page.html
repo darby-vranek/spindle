@@ -25,8 +25,8 @@
   <link id="pagestyle" href="{% static 'bootstrap-tagsinput/src/bootstrap-tagsinput.css' %}" rel="stylesheet" />
 </head>
 
-<body class="bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+<body class="bg-gradient-dark">
+  <div class="min-height-300 bg-gradient-dark position-absolute w-100"></div>
   <main class="main-content position-relative border-radius-lg ">
     {% include '_navbar.html' %}
     <div class="container-fluid py-4">
@@ -44,6 +44,6 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   {% block extra_scripts %}{% endblock %}
-  <script src="{% static 'assets/js/argon-dashboard.min.js?v=2.0.1' %}"></script>
+  <script src="{% static 'assets/js/argon-dashboard.min.js' %}"></script>
   </script>
 </body>
