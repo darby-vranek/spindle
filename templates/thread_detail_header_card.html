@@ -1,20 +1,8 @@
-<div class="card overflow-scroll rounded-0">
-    <div class="card-header">
-        <h1 class="display-4 text-center mb-0">{{ thread.title }}</h1>
+<div class="card card-plain overflow-scroll rounded-0">
+    <div class="card-header px-0 bg-transparent">
+        <h1 class="display-4 text-white mb-1">{{ thread.title }}</h1>
         {% if thread.verse %}
-        <h6 class="card-subtitle text-center"><a class="text-danger" href="{% url 'verse-detail' pk=thread.verse.pk %}"><i class="ni ni-planet small"></i> {{ thread.verse.name }}</a></h6>
+        <h6 class="card-subtitle"><a class="text-danger" href="{% url 'verse-detail' pk=thread.verse.pk %}"><i class="ni ni-planet small"></i> {{ thread.verse.name }}</a></h6>
         {% endif %}
-    </div>
-    <div class="card-body d-flex pt-0">
-        <div class="row mx-auto">
-            {% for character in thread.characters.all %}
-            <div class="col-auto text-center">
-                <a href="{% url 'character-detail' page_name=character.page_name %}" class="avatar avatar-xl rounded-circle border border-primary">
-                    <img alt="{{ character.page_name }}" class="p-1" src="{{ character.avatar }}">
-                </a>
-                <p class="mb-0 text-sm">{{ character.page_name }}</p>
-            </div>
-            {% endfor %}
-        </div>
     </div>
 </div>

@@ -1,14 +1,17 @@
 {% extends '_page.html' %}
 {% block title %}threads{% endblock %}
 {% block main %}
-  <div class="header">
-    <h1 class="display-2 text-white mb-0">Threads</h1>
-    <a href="{% url 'thread-create' %}">
-      <button type="button" class="btn btn-white">New</button>
-    </a>
+  <div class="header px-4">
+    <h3 class="mt-5 text-white">Threads<span></span></h3>
+    {% if user.is_authenticated %}
+    <a href="{% url 'thread-create' %}"><button class="btn btn-icon btn-3 btn-primary btn-xs" type="button">
+        <span class="btn-inner--icon"><i class="ni ni-fat-add align-middle small"></i></span>
+        <span class="btn-inner--text">NEW</span>
+    </button></a>
+    {% endif %}
   </div>
-  <div class="col-8">
-    <div class="card">
+  <div class="col-8 px-4">
+    <div class="card rounded-0">
       <div class="table-responsive">
         <table class="table table-flush" id="datatable-basic">
           <thead class="thead-light">

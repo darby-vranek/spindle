@@ -20,68 +20,105 @@
                             <h5 class="font-weight-bolder mb-0">{{ character.name }}</h5>
                             <p class="text-uppercase text-sm font-weight-bold mb-2">{{ character.caption }}</p>
                         </div>
-{#                        {% if character.user == user %}#}
-{#                        <div class="btn-group">#}
-{#                            <a href="{% url 'character-update' page_name=character.page_name %}" class="btn btn-icon btn-round btn-primary btn-xs" type="button">#}
-{#                                <span class="btn-inner--icon"><i class="fa fa-pen"></i></span>#}
-{#                            </a>#}
-{#                            <a href="{% url 'character-delete' page_name=character.page_name %}" class="btn btn-icon btn-round btn-danger btn-xs" type="button">#}
-{#                                <span class="btn-inner--icon"><i class="fa fa-trash small"></i></span>#}
-{#                            </a>#}
-{#                        </div>#}
-{#                        {% endif %}#}
+                        {% if character.user == user %}
+                        <div class="btn-group">
+                            <a href="{% url 'character-update' page_name=character.page_name %}" class="btn btn-icon btn-round btn-primary btn-xs" type="button">
+                                <span class="btn-inner--icon"><i class="fa fa-pen"></i></span>
+                            </a>
+                            <a href="{% url 'character-delete' page_name=character.page_name %}" class="btn btn-icon btn-round btn-danger btn-xs" type="button">
+                                <span class="btn-inner--icon"><i class="fa fa-trash small"></i></span>
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="card card-plain">
-            <div class="card-body">
-
-
-
-
-
-<ul class="nav nav-pills bg-transparent id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button" role="tab" aria-controls="posts" aria-selected="true"><i class="ni ni-single-copy-04 text-sm me-2"></i> Posts</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="ni ni-chat-round text-sm me-2"></i> Threads</button>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab">
-      <div class="table-responsive">
-          <table class="table table-flush" id="datatable-basic">
-              <thead class="thead-light">
-                  <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Verse</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Words</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Posted</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {% for post in character.posts.all %}
-                  <tr>
-                      <td class="text-sm font-weight-normal"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></td>
-                      <td class="text-sm font-weight-normal">
-                          {% if post.verse %}
-                          <a href="{% url 'verse-detail' pk=post.verse.pk %}">{{ post.verse.name }}</a>
-                          {% endif %}
-                      </td>
-                      <td class="text-sm font-weight-normal">{{ post.content.html|striptags|wordcount }}</td>
-                      <td class="text-sm font-weight-normal">{{ post.created }}</td>
-                  </tr>
-                  {% endfor %}
-              </tbody>
-          </table>
+    <div class="col-8">
+    <div class="card rounded-0">
+        <ul class="nav nav-pills bg-transparent id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button" role="tab" aria-controls="posts" aria-selected="true"><i class="ni ni-single-copy-04 text-sm me-2"></i> Posts</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><i class="ni ni-chat-round text-sm me-2"></i> Threads</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="post-tab">
+              <div class="table-responsive">
+                  <table class="table table-flush" id="datatable-basic">
+                      <thead class="thead-light">
+                          <tr>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Verse</th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Words</th>
+                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Posted</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for post in character.posts.all %}
+                          <tr>
+                              <td class="text-sm font-weight-normal"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></td>
+                              <td class="text-sm font-weight-normal">
+                                  {% if post.verse %}
+                                  <a href="{% url 'verse-detail' pk=post.verse.pk %}">{{ post.verse.name }}</a>
+                                  {% endif %}
+                              </td>
+                              <td class="text-sm font-weight-normal">{{ post.content.html|striptags|wordcount }}</td>
+                              <td class="text-sm font-weight-normal">{{ post.created }}</td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="table-responsive">
+        <table class="table table-flush" id="datatable-basic">
+          <thead class="thead-light">
+            <tr>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Characters</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Verse</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Replies</th>
+              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Last Reply</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for thread in character.threads.all %}
+            <tr>
+              <td class="text-sm font-weight-normal"><a href="{% url 'thread-detail' pk=thread.pk %}">{{ thread.title }}</a></td>
+             <td class="text-sm font-weight-normal">
+                  <div class="avatar-group ms-auto">
+                    {% for c in thread.characters.all %}
+                    <a href="{% url 'character-detail' page_name=c.page_name %}" class="avatar avatar-lg avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ c.page_name }}">
+                      <img alt="{{ c.page_name }}" src="{{ c.avatar }}">
+                    </a>
+                    {% endfor %}
+                  </div>
+              </td>
+              <td class="text-sm font-weight-normal">
+                  {% if thread.verse %}
+                      <a href="{% url 'verse-detail' pk=thread.verse.pk %}">{{ thread.verse.name }}</a>
+                  {% endif %}
+              </td>
+              <td class="text-sm font-weight-normal">{{ thread.replies.all|length }}</td>
+                <td class="text-sm font-weight-normal">
+                    {% if thread.replies.all %}
+                    {{ thread.last_reply.created|date:'SHORT_DATE_FORMAT' }} by <a href="{% url 'character-detail' page_name=thread.last_reply.character.page_name %}">{{ thread.last_reply.character.page_name }}</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-  </div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+          </div>
+          </div>
+        </div>
+    </div>
 </div>
 
 

@@ -1,7 +1,7 @@
-<div class="card mb-3 rounded-0">
-    <div class="card-header d-flex align-items-center border-bottom py-3">
-        <div class="d-flex align-items-center">
-            <a href="{% url 'character-detail' page_name=reply.character.page_name %}">
+<div class="card mb-4 rounded-0">
+    <div class="card-header d-flex justify-content-between border-bottom py-3">
+        <div class="d-flex">
+            <a href="{% url 'character-detail' page_name=reply.character.page_name %}" >
                 <img src="{{ reply.character.avatar }}" class="avatar" alt="profile-image">
             </a>
             <div class="mx-3">
@@ -9,20 +9,20 @@
                 <small class="d-block text-muted">{{ reply.created }}</small>
             </div>
         </div>
-        <div class="d-flex justify-content-end">
+
             {% if reply.user == user %}
 
     <div class="btn-group">
-      <a href="{% url 'reply-update' pk=reply.pk %}" class="btn btn-icon btn-round btn-primary btn-xs" type="button">
-        <span class="btn-inner--icon"><i class="fa fa-pen"></i></span>
+      <a href="{% url 'reply-update' pk=reply.pk %}" class="nav-link px-2 py-1 text-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Reply">
+        <span class="btn-inner--icon text-secondary"><i class="fa fa-pen small"></i></span>
       </a>
-      <a href="{% url 'reply-delete' pk=reply.pk %}" class="btn btn-icon btn-round btn-danger btn-xs" type="button">
-        <span class="btn-inner--icon"><i class="fa fa-trash small"></i></span>
+      <a href="{% url 'reply-delete' pk=reply.pk %}" class="nav-link px-0 py-1 text-xs" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Reply">
+        <span class="btn-inner--icon text-secondary"><i class="fa fa-trash small"></i></span>
       </a>
     </div>
 
   {% endif %}
-        </div>
+
     </div>
 
     <div class="card-body">

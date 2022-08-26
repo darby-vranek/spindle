@@ -1,15 +1,18 @@
 {% extends '_page.html' %}
 {% block title %}posts{% endblock %}
 {% block main %}
-  <div class="header">
-    <h3 class="mt-5 text-white">Build Your Profile</h3>
-          <h5 class="text-white font-weight-normal">This information will let us know more about you.</h5>
-    <a href="{% url 'post-create' %}">
-      <button type="button" class="btn btn-white">New</button>
-    </a>
+
+  <div class="header px-4">
+    <h3 class="mt-5 text-white">Posts<span></span></h3>
+    {% if user.is_authenticated %}
+    <a href="{% url 'post-create' %}"><button class="btn btn-icon btn-3 btn-primary btn-xs" type="button">
+        <span class="btn-inner--icon"><i class="ni ni-fat-add align-middle small"></i></span>
+        <span class="btn-inner--text">NEW</span>
+    </button></a>
+    {% endif %}
   </div>
-  <div class="col-8">
-    <div class="card">
+  <div class="col-8 px-4">
+    <div class="card rounded-0">
       <div class="table-responsive">
         <table class="table table-flush" id="datatable-basic">
           <thead class="thead-light">

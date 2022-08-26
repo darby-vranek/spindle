@@ -2,11 +2,13 @@
 {% block title %}{{ thread.title }}{% endblock %}
 {% block headlinks %}{% include 'django_quill/media.html' %}{% endblock %}
 {% block main %}
-<div class="row">
-    <div class="col-md-4">
+<div class="row px-md-4">
+{#    <div class="col-auto mx-auto">#}
+{#        {% include 'thread_detail_header_card.html' %}#}
+{#    </div>#}
+    <div class="col-lg-6 col-sm-8 px-md-r">
         {% include 'thread_detail_header_card.html' %}
-    </div>
-    <div class="col-md-6">
+{#        {% include 'thread_characters_card.html' %}#}
         {% for reply in thread.replies.all %}
         {% include 'reply_detail_card.html' %}
         {% endfor %}
